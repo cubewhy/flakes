@@ -154,6 +154,9 @@
     sbctl
     p7zip
     rar
+    bind
+    usbutils
+    pciutils
 
     kdePackages.ksshaskpass
     kdePackages.partitionmanager
