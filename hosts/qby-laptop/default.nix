@@ -199,12 +199,40 @@
     amdgpuBusId = "PCI:5@0:0:0";
   };
 
-  fonts.packages = with pkgs; [
-    noto-fonts
-    inter
-  ];
+  fonts = {
+    enableDefaultPackages = true;
 
-  fonts.fontconfig.useEmbeddedBitmaps = true;
+    packages = with pkgs; [
+      cantarell-fonts
+      inter
+
+      source-han-sans
+      source-han-serif
+
+      noto-fonts-color-emoji
+    ];
+
+    fontconfig = {
+      enable = true;
+
+      defaultFonts = {
+        sansSerif = [ "Source Han Sans SC" ];
+        serif = [ "Source Han Serif SC" ];
+        monospace = [ "JetBrainsMono Nerd Font" ];
+        emoji = [ "Noto Color Emoji" ];
+      };
+
+      antialias = true;
+      hinting = {
+        enable = true;
+        style = "slight";
+      };
+      subpixel = {
+        rgba = "rgb";
+        lcdfilter = "default";
+      };
+    };
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
