@@ -11,6 +11,7 @@
       ../../locale/zh-cn.nix
       ../../software/fcitx5.nix
       ../../software/direnv.nix
+      ../../software/nix-ld.nix
       ../../software/plymouth.nix
       ../../software/proxy/mihomo
       ../../software/virt/podman.nix
