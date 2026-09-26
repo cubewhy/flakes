@@ -132,6 +132,19 @@
     "gpiolib_acpi.ignore_wake=AMDI0030:00@4"
   ];
 
+  services.udev.extraRules = ''
+    SUBSYSTEM=="hidraw", ATTRS{idVendor}=="342d", ATTRS{idProduct}=="e487", MODE="0666", TAG+="uaccess"
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="342d", ATTRS{idProduct}=="e487", MODE="0666", TAG+="uaccess"
+    SUBSYSTEM=="usb", ATTR{idVendor}=="362d", ATTR{idProduct}=="d20f", MODE="0660", TAG+="uaccess"
+    SUBSYSTEM=="hidraw", ATTR{idVendor}=="362d", ATTR{idProduct}=="d20f", MODE="0660", TAG+="uaccess"
+    SUBSYSTEM=="usb", ATTR{idVendor}=="3434", ATTR{idProduct}=="d000", MODE="0660", TAG+="uaccess"
+    SUBSYSTEM=="hidraw", ATTR{idVendor}=="3434", ATTR{idProduct}=="d000", MODE="0660", TAG+="uaccess"
+
+    # Gaomon M5 V2 / 256c:200e
+    KERNEL=="hidraw*", ATTRS{idVendor}=="256c", ATTRS{idProduct}=="200e", MODE="0666"
+    SUBSYSTEM=="usb", ATTR{idVendor}=="256c", ATTR{idProduct}=="200e", MODE="0666"
+  '';
+
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
