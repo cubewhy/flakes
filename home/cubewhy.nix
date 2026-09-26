@@ -24,6 +24,7 @@
     thunderbird
     ayugram-desktop
     cotp
+    wl-clipboard
 
     nerd-fonts.jetbrains-mono
   ];
