@@ -66,12 +66,23 @@
 
     shellAliases = {
       rebuild = "sudo nixos-rebuild switch --flake ~/flakes#qby-laptop";
+      ollama = "podman exec -it ollama ollama";
     };
+
+    initContent = ''
+      v() {
+        zi "$@" && nvim
+      }
+    '';
+
     history.size = 10000;
     oh-my-zsh = {
       enable = true;
       plugins = [ "git" "zoxide" ];
       theme = "robbyrussell";
+      extraConfig = ''
+        ZSH_DISABLE_COMPFIX="true"
+      '';
     };
   };
 
