@@ -64,7 +64,8 @@
       xorg.libXi
       xorg.libSM
       xorg.libICE
-      gnome2.GConf
+      gsettings
+      dconf
       nspr
       nss
       cups
