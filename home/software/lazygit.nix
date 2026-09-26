@@ -18,6 +18,7 @@ in {
   xdg.configFile = {
     "lazygit/config.yml".text = ''
       git:
+        overrideGpg: true
         log:
             order: default
         diffRenderers:
