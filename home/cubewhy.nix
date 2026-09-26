@@ -24,6 +24,8 @@
     thunderbird
     ayugram-desktop
     cotp
+    krita
+    gimp
     wl-clipboard
 
     nerd-fonts.jetbrains-mono
