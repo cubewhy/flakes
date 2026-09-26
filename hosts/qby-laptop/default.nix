@@ -14,6 +14,7 @@
       ../../software/plymouth.nix
       ../../software/proxy/mihomo
       ../../software/virt/podman.nix
+      ../../software/virt/distrobox.nix
       ../../software/drivers/nvidia.nix
       ../../software/drivers/bluetooth.nix
       ../../software/drivers/remap-copilot.nix
