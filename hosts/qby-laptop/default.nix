@@ -9,6 +9,7 @@
     [
       ./hardware-configuration.nix
       ../../locale/zh-cn.nix
+      ../../software/steam.nix
       ../../software/fcitx5.nix
       ../../software/direnv.nix
       ../../software/nix-ld.nix
