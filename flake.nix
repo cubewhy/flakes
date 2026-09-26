@@ -1,0 +1,48 @@
+{
+  description = "NixOS system configuration";
+
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v1.1.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+
+  outputs = { self, nixpkgs, home-manager, lanzaboote, sops-nix, ...}@inputs: {
+    nixosConfigurations = {
+      qby-laptop = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/qby-laptop
+
+          lanzaboote.nixosModules.lanzaboote
+
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+
+            home-manager.extraSpecialArgs = { inherit inputs; };
+            home-manager.users."cubewhy" = {
+              imports = [
+                sops-nix.homeManagerModules.sops
+                ./home/cubewhy.nix
+              ];
+            };
+          }
+        ];
+      };
+    };
+  };
+}

@@ -1,0 +1,246 @@
+proxy-providers:
+  substore:
+    url: "http://127.0.0.1:23001/fedora/download/collection/subscription?target=ClashMeta"
+    type: http
+    interval: 86400
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+    proxy: Direct
+
+  # landing_nodes:
+  #   url: "http://127.0.0.1:23001/fedora/download/collection/dialers?target=ClashMeta"
+  #   type: http
+  #   interval: 86400
+  #   override:
+  #     dialer-proxy: "Foreign"
+  #   health-check:
+  #     enable: true
+  #     url: https://www.gstatic.com/generate_204
+  #     interval: 300
+  #   proxy: Direct
+
+proxies:
+  - { name: Direct, type: direct }
+
+mixed-port: 7891
+port: 7890
+allow-lan: true
+bind-address: "*"
+ipv6: true
+unified-delay: true
+tcp-concurrent: true
+log-level: warning
+find-process-mode: strict
+global-client-fingerprint: chrome
+keep-alive-idle: 600
+keep-alive-interval: 15
+
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+external-controller: 127.0.0.1:9090
+secret: ""
+external-ui: ui
+
+sniffer:
+  enable: true
+  sniff:
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+    TLS:
+      ports: [443, 8443]
+  skip-domain:
+    - "Mijia Cloud"
+    - "+.push.apple.com"
+
+tun:
+  enable: true
+  stack: system
+  dns-hijack: ["any:53", "tcp://any:53"]
+  device: utun
+  auto-route: true
+  auto-redirect: true
+  auto-detect-interface: true
+  sniff-override-destination: true
+  inet4-address: [172.19.0.1/28]
+  bypass-lan:
+    - 192.168.0.0/16
+    - 10.0.0.0/8
+    - 172.17.0.0/16
+    - 10.88.0.0/16
+    - 10.89.0.0/16
+    - 169.254.0.0/16
+    - 172.16.0.0/12
+
+dns:
+  enable: true
+  cache-algorithm: arc
+  listen: 0.0.0.0:1053
+  prefer-h3: false
+  use-hosts: true
+  use-system-hosts: true
+  ipv6: false
+  respect-rules: false
+  enhanced-mode: fake-ip
+  fake-ip-range: 28.0.0.1/8
+  fake-ip-filter-mode: blacklist
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+    - 180.76.76.76
+  proxy-server-nameserver:
+    - tls://223.5.5.5:853
+    - tls://1.12.12.12:853
+  direct-nameserver:
+    - tls://1.12.12.12:853
+    - tls://223.5.5.5:853
+  nameserver:
+    - tls://1.1.1.1:853#Foreign
+    - tls://8.8.8.8:853#Foreign
+  nameserver-policy:
+    "geosite:cn,private":
+      - tls://223.5.5.5:853
+      - tls://1.12.12.12:853
+    "geosite:gfw,geolocation-!cn":
+      - tls://1.1.1.1:853#Proxy
+      - tls://8.8.8.8:853#Proxy
+  fake-ip-filter:
+    - "rule-set:fakeipfilter_domain"
+    - "nmcheck.gnome.org"
+
+proxy-groups:
+  # - name: landing
+  #   type: select
+  #   use:
+  #     - landing_nodes
+
+  - name: "Foreign"
+    type: select
+    use:
+      - substore
+    proxies:
+      - "Auto"
+      - Direct
+    filter: "^((?!(Direct)).)*$"
+
+  - name: "AI"
+    type: select
+    use:
+      - substore
+    proxies:
+      - "Foreign"
+      - "Auto"
+      - Direct
+    filter: "^((?!(Direct)).)*$"
+
+  - name: "Telegram"
+    type: select
+    use:
+      - substore
+    proxies:
+      - "Foreign"
+      - "Auto"
+    filter: "^((?!(Direct)).)*$"
+
+  - name: "Cloudflare"
+    type: select
+    use:
+      - substore
+    proxies:
+      - "Foreign"
+      - "Auto"
+      - Direct
+    filter: "^((?!(Direct)).)*$"
+
+  - name: "Steam"
+    type: select
+    use:
+      - substore
+    proxies:
+      - "Foreign"
+      - "Auto"
+      - Direct
+    filter: "^((?!(Direct)).)*$"
+
+  - name: "Auto"
+    type: url-test
+    use:
+      - substore
+    tolerance: 20
+    interval: 300
+    filter: "^((?!(Direct)).)*$"
+
+  - name: "Domestic"
+    type: select
+    use:
+      - substore
+    proxies:
+      - Direct
+    filter: "^((?!(Direct)).)*$"
+
+  - name: "Final"
+    type: select
+    proxies:
+      - "Foreign"
+      # - "landing"
+      - "Domestic"
+      - Direct
+
+rules:
+  - IP-CIDR,169.254.0.0/16,Direct
+  - RULE-SET,private_ip,Direct,no-resolve
+  - RULE-SET,private_domain,Direct
+  - PROCESS-NAME,NetworkManager,Direct
+  - DOMAIN,mirrors.fedoraproject.org,Direct
+  - RULE-SET,cn_domain,Domestic
+  - RULE-SET,cn_ip,Domestic,no-resolve
+  - RULE-SET,ai_domain,AI
+  - RULE-SET,steam_domain,Steam
+  - RULE-SET,telegram_ip,Telegram
+  - RULE-SET,cloudflare_ip,Cloudflare
+  - MATCH,Final
+
+rule-anchor:
+  ip: &ip { type: http, interval: 86400, behavior: ipcidr, format: mrs }
+  domain: &domain { type: http, interval: 86400, behavior: domain, format: mrs }
+
+rule-providers:
+  fakeipfilter_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/wwqgtxx/clash-rules/release/fakeip-filter.mrs"
+
+  private_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"
+
+  cn_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"
+
+  ai_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ai-!cn.mrs"
+
+  steam_domain:
+    <<: *domain
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/steam.mrs"
+
+  telegram_ip:
+    <<: *ip
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs"
+
+  cloudflare_ip:
+    <<: *ip
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cloudflare.mrs"
+
+  private_ip:
+    <<: *ip
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs"
+
+  cn_ip:
+    <<: *ip
+    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"

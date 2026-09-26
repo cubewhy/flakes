@@ -1,0 +1,7 @@
+keys:
+  - &cubewhy age1p6ly96er82sffyxq9qf3way4kpaqp5e3yx4gngnmk72ntysgg37shdzmcn
+creation_rules:
+  - path_regex: secrets/[^/]+\.(yaml|json|env)$
+    key_groups:
+      - age:
+          - *cubewhy
