@@ -171,6 +171,11 @@
     kdePackages.filelight
   ];
 
+  services.flatpak = {
+    enable = true;
+    packages = [];
+  };
+
   environment.plasma6.excludePackages = with pkgs; [
     kdePackages.discover
   ];

@@ -17,9 +17,11 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
   };
 
-  outputs = { self, nixpkgs, home-manager, lanzaboote, sops-nix, ...}@inputs: {
+  outputs = { self, nixpkgs, home-manager, lanzaboote, sops-nix, nix-flatpak, ...}@inputs: {
     nixosConfigurations = {
       qby-laptop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -27,6 +29,7 @@
           ./hosts/qby-laptop
 
           lanzaboote.nixosModules.lanzaboote
+          nix-flatpak.nixosModules.nix-flatpak
 
           home-manager.nixosModules.home-manager
           {
