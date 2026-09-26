@@ -27,6 +27,7 @@
     krita
     gimp
     wl-clipboard
+    vlc
 
     nerd-fonts.jetbrains-mono
   ];
