@@ -41,10 +41,9 @@
     };
   };
 
-  virtualisation.containers.registries.search = [
-    "docker.io"
-    "quay.io"
-  ];
+  virtualisation.containers.registries.settings = {
+    unqualified-search-registries = [ "docker.io" "quay.io" ];
+  };
 
   networking.firewall = {
     trustedInterfaces = ["podman0"];
