@@ -2,6 +2,10 @@
   boot = {
     plymouth = {
       enable = true;
+      extraConfig = ''
+        [Daemon]
+        DeviceScale=an-integer-scaling-factor
+      '';
     };
 
     # Enable "Silent boot"
