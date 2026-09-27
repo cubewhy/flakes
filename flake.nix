@@ -19,12 +19,14 @@
     };
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
+    chinese-fonts-overlay.url = "github:brsvh/chinese-fonts-overlay/main";
   };
 
-  outputs = { self, nixpkgs, home-manager, lanzaboote, sops-nix, nix-flatpak, ...}@inputs: {
+  outputs = { self, nixpkgs, home-manager, lanzaboote, sops-nix, nix-flatpak, chinese-fonts-overlay, ...}@inputs: {
     nixosConfigurations = {
       qby-laptop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
         modules = [
           ./hosts/qby-laptop
 

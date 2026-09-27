@@ -1,5 +1,11 @@
-{pkgs, ...}: {
+{pkgs, inputs, ...}: {
   time.timeZone = "Asia/Shanghai";
+
+  nixpkgs.overlays = [ inputs.chinese-fonts-overlay.overlays.default ];
+
+  fonts.packages = with pkgs; [
+    alibaba-fonts
+  ];
 
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "zh_CN.UTF-8";
