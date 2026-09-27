@@ -36,6 +36,15 @@
     "$HOME/.local/bin"
   ];
 
+  home.file.".cargo/config.toml".text = ''
+    [build]
+    rustc-wrapper = "sccache"
+
+    [target.x86_64-unknown-linux-gnu]
+    linker = "clang"
+    rustflags = ["-C", "link-arg=-fuse-ld=mold"]
+  '';
+
   dconf.settings = {
     "org/virt-manager/virt-manager/connections" = {
       autoconnect = ["qemu:///system"];

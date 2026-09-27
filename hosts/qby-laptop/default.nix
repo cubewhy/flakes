@@ -13,6 +13,7 @@
       ../../software/fcitx5.nix
       ../../software/direnv.nix
       ../../software/nix-ld.nix
+      ../../software/sccache.nix
       ../../software/plymouth.nix
       ../../software/proxy/mihomo
       ../../software/virt/podman.nix
