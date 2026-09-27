@@ -28,6 +28,7 @@
     gimp
     wl-clipboard
     vlc
+    sccache
 
     nerd-fonts.jetbrains-mono
   ];
