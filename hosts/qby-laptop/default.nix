@@ -106,6 +106,7 @@
   services.displayManager.plasma-login-manager.enable = true;
   services.desktopManager.plasma6.enable = true;
   programs.kdeconnect.enable = true;
+  hardware.i2c.enable = true;
 
   services.xserver = {
     excludePackages = [pkgs.xterm];
@@ -139,7 +140,7 @@
   users.users."cubewhy" = {
     isNormalUser = true;
     description = "cubewhy";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "i2c" ];
   };
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
@@ -182,6 +183,7 @@
     p7zip
     rar
     bind
+    ddcutil
     usbutils
     pciutils
 

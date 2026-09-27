@@ -36,6 +36,9 @@
     enable = true;
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
+      Environment = [
+        "PATH=/run/wrappers/bin:/run/current-system/sw/bin:%h/.nix-profile/bin"
+      ];
       ExecStart = [
         ""
         "${pkgs.podman}/bin/podman start --all --filter restart-policy=always --filter restart-policy=unless-stopped"
