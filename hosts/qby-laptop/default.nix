@@ -39,18 +39,41 @@
   boot.initrd.kernelModules = [ "tpm_crb" "tpm_tis"];
 
   boot.initrd.luks.devices = {
-    "luks-f5030deb-c3d5-42f7-812a-68994bfe9663".crypttabExtraOpts = [ "tpm2-device=auto" ];
+    "luks-f5030deb-c3d5-42f7-812a-68994bfe9663" = {
+      allowDiscards = true;
+      bypassWorkqueues = true;
+      crypttabExtraOpts = [ "tpm2-device=auto" ];
+    };
 
     "luks-c01678b1-2176-41da-9b3e-b39d7fab3608" = {
       device = "/dev/disk/by-uuid/c01678b1-2176-41da-9b3e-b39d7fab3608";
+      allowDiscards = true;
+      bypassWorkqueues = true;
       crypttabExtraOpts = [ "tpm2-device=auto" ];
     };
 
     "cryptdata" = {
       device = "/dev/disk/by-uuid/9f9c80d1-5cbb-44a4-8c21-e96eab99dc97";
+      allowDiscards = true;
+      bypassWorkqueues = true;
       crypttabExtraOpts = [ "tpm2-device=auto" ];
     };
   };
+
+  services.fstrim.enable = true;
+
+  fileSystems."/home".options = lib.mkForce [
+    "subvol=home"
+    "noatime"
+    "compress=zstd"
+  ];
+
+  fileSystems."/nix".options = lib.mkForce [
+    "subvol=nix"
+    "noatime"
+    "compress=zstd"
+  ];
+
 
   fileSystems."/mnt/data" = {
     device = "/dev/mapper/cryptdata";
@@ -58,6 +81,7 @@
     options = [
       "defaults"
       "nofail"
+      "noatime"
     ];
   };
 
