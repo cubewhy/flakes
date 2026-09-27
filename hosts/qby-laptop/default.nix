@@ -224,38 +224,31 @@
     amdgpuBusId = "PCI:5@0:0:0";
   };
 
+
   fonts = {
     enableDefaultPackages = true;
 
     packages = with pkgs; [
       cantarell-fonts
+      ubuntu-sans
       inter
 
       source-han-sans
       source-han-serif
 
+      noto-fonts
       noto-fonts-color-emoji
     ];
 
     fontconfig = {
       enable = true;
 
-      defaultFonts = {
-        sansSerif = [ "Source Han Sans SC" ];
-        serif = [ "Source Han Serif SC" ];
-        monospace = [ "JetBrainsMono Nerd Font" ];
-        emoji = [ "Noto Color Emoji" ];
-      };
-
-      antialias = true;
-      hinting = {
-        enable = true;
-        style = "slight";
-      };
-      subpixel = {
-        rgba = "rgb";
-        lcdfilter = "default";
-      };
+      # defaultFonts = {
+      #   sansSerif = [ "Source Han Sans SC" ];
+      #   serif = [ "Source Han Serif SC" ];
+      #   monospace = [ "JetBrainsMono Nerd Font" ];
+      #   emoji = [ "Noto Color Emoji" ];
+      # };
     };
   };
 
