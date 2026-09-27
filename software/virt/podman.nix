@@ -23,6 +23,7 @@
 
   systemd.services.podman-restart = {
     enable = true;
+    wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       ExecStart = [
         ""
@@ -33,6 +34,7 @@
 
   systemd.user.services.podman-restart = {
     enable = true;
+    wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       ExecStart = [
         ""
