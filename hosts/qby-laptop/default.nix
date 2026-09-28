@@ -165,6 +165,8 @@
     SUBSYSTEM=="usb", ATTRS{idVendor}=="342d", ATTRS{idProduct}=="e487", MODE="0666", TAG+="uaccess"
     SUBSYSTEM=="usb", ATTR{idVendor}=="362d", ATTR{idProduct}=="d20f", MODE="0660", TAG+="uaccess"
     SUBSYSTEM=="hidraw", ATTR{idVendor}=="362d", ATTR{idProduct}=="d20f", MODE="0660", TAG+="uaccess"
+    SUBSYSTEM=="usb", ATTR{idVendor}=="362d", ATTR{idProduct}=="d107", MODE="0660", TAG+="uaccess"
+    SUBSYSTEM=="hidraw", ATTR{idVendor}=="362d", ATTR{idProduct}=="d107", MODE="0660", TAG+="uaccess"
     SUBSYSTEM=="usb", ATTR{idVendor}=="3434", ATTR{idProduct}=="d000", MODE="0660", TAG+="uaccess"
     SUBSYSTEM=="hidraw", ATTR{idVendor}=="3434", ATTR{idProduct}=="d000", MODE="0660", TAG+="uaccess"
 
