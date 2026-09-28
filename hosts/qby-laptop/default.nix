@@ -15,6 +15,7 @@
       ../../software/nix-ld.nix
       ../../software/sccache.nix
       ../../software/plymouth.nix
+      ../../software/wireshark.nix
       ../../software/proxy/mihomo
       ../../software/virt/podman.nix
       ../../software/virt/distrobox.nix
@@ -140,7 +141,7 @@
   users.users."cubewhy" = {
     isNormalUser = true;
     description = "cubewhy";
-    extraGroups = [ "networkmanager" "wheel" "i2c" ];
+    extraGroups = [ "networkmanager" "wheel" "i2c" "wireshark" ];
   };
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
