@@ -248,12 +248,10 @@
     fontconfig = {
       enable = true;
 
-      # defaultFonts = {
-      #   sansSerif = [ "Source Han Sans SC" ];
-      #   serif = [ "Source Han Serif SC" ];
-      #   monospace = [ "JetBrainsMono Nerd Font" ];
-      #   emoji = [ "Noto Color Emoji" ];
-      # };
+      defaultFonts = {
+        monospace = [ "JetBrainsMono Nerd Font" ];
+        emoji = [ "Noto Color Emoji" ];
+      };
     };
   };
 
