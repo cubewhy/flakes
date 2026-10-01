@@ -214,7 +214,7 @@
     imagemagick
     sqlite
     gnumake
-    nixfmt-rfc-style
+    nixfmt
     nil
 
     nodejs_24
