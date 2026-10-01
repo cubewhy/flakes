@@ -214,6 +214,7 @@
     imagemagick
     sqlite
     gnumake
+    nixfmt-rfc-style
 
     nodejs_24
     corepack
