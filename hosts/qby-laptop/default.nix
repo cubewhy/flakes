@@ -215,6 +215,7 @@
     sqlite
     gnumake
     nixfmt-rfc-style
+    nil
 
     nodejs_24
     corepack
