@@ -87,6 +87,16 @@
       v() {
         zi "$@" && nvim
       }
+
+      dev-run() {
+        distrobox enter dev -- bash -ic "$*"
+      }
+
+      if [[ -z "$DISTROBOX_ENTERED" && ! -f /run/.containerenv ]]; then
+        nvim() {
+          distrobox enter dev -- bash -lic 'command nvim "$@"' _ "$@"
+        }
+      fi
     '';
 
     history.size = 10000;
