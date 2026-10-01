@@ -2,28 +2,32 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-      ../../locale/zh-cn.nix
-      ../../software/steam.nix
-      ../../software/fcitx5.nix
-      ../../software/direnv.nix
-      ../../software/nix-ld.nix
-      ../../software/sccache.nix
-      ../../software/plymouth.nix
-      ../../software/wireshark.nix
-      ../../software/proxy/mihomo
-      ../../software/virt/podman.nix
-      ../../software/virt/distrobox.nix
-      ../../software/drivers/nvidia.nix
-      ../../software/drivers/bluetooth.nix
-      ../../software/drivers/remap-copilot.nix
-      ../../software/drivers/opentabletdriver.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+    ../../locale/zh-cn.nix
+    ../../software/steam.nix
+    ../../software/fcitx5.nix
+    ../../software/direnv.nix
+    ../../software/nix-ld.nix
+    ../../software/sccache.nix
+    ../../software/plymouth.nix
+    ../../software/wireshark.nix
+    ../../software/proxy/mihomo
+    ../../software/virt/podman.nix
+    ../../software/virt/distrobox.nix
+    ../../software/drivers/nvidia.nix
+    ../../software/drivers/bluetooth.nix
+    ../../software/drivers/remap-copilot.nix
+    ../../software/drivers/opentabletdriver.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = lib.mkForce false;
@@ -38,7 +42,10 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   boot.initrd.systemd.enable = true;
-  boot.initrd.kernelModules = [ "tpm_crb" "tpm_tis"];
+  boot.initrd.kernelModules = [
+    "tpm_crb"
+    "tpm_tis"
+  ];
 
   boot.initrd.luks.devices = {
     "luks-f5030deb-c3d5-42f7-812a-68994bfe9663" = {
@@ -76,7 +83,6 @@
     "compress=zstd"
   ];
 
-
   fileSystems."/mnt/data" = {
     device = "/dev/mapper/cryptdata";
     fsType = "ext4";
@@ -110,7 +116,7 @@
   hardware.i2c.enable = true;
 
   services.xserver = {
-    excludePackages = [pkgs.xterm];
+    excludePackages = [ pkgs.xterm ];
   };
 
   # Configure keymap in X11
@@ -141,10 +147,18 @@
   users.users."cubewhy" = {
     isNormalUser = true;
     description = "cubewhy";
-    extraGroups = [ "networkmanager" "wheel" "i2c" "wireshark" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "i2c"
+      "wireshark"
+    ];
   };
 
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -178,11 +192,21 @@
 
   nixpkgs.overlays = [
     (final: prev: {
-     kdePackages = prev.kdePackages.overrideScope (kdeFinal: kdePrev: {
-        spectacle = kdePrev.spectacle.override {
-          tesseractLanguages = [ "fra" "eng" "deu" "spa" "chi_sim" "chi_tra" "jpn" ];
-        };
-      });
+      kdePackages = prev.kdePackages.overrideScope (
+        kdeFinal: kdePrev: {
+          spectacle = kdePrev.spectacle.override {
+            tesseractLanguages = [
+              "fra"
+              "eng"
+              "deu"
+              "spa"
+              "chi_sim"
+              "chi_tra"
+              "jpn"
+            ];
+          };
+        }
+      );
       neovim = prev.symlinkJoin {
         name = "neovim-wrapped";
         paths = [ prev.neovim ];
@@ -192,7 +216,7 @@
             --prefix LD_LIBRARY_PATH : "${prev.lib.makeLibraryPath [ prev.sqlite ]}"
         '';
       };
-     })
+    })
   ];
 
   # List packages installed in system profile.
@@ -239,7 +263,7 @@
 
   services.flatpak = {
     enable = true;
-    packages = [];
+    packages = [ ];
   };
 
   environment.plasma6.excludePackages = with pkgs; [
@@ -253,7 +277,6 @@
     "amdgpu"
   ];
 
-
   hardware.nvidia.prime = {
     offload = {
       enable = true;
@@ -263,7 +286,6 @@
     nvidiaBusId = "PCI:1:0:0";
     amdgpuBusId = "PCI:7:0:0";
   };
-
 
   fonts = {
     enableDefaultPackages = true;
@@ -325,7 +347,12 @@
   # services.openssh.enable = true;
 
   networking.firewall = rec {
-    allowedTCPPortRanges = [ { from = 1714; to = 1764; } ];
+    allowedTCPPortRanges = [
+      {
+        from = 1714;
+        to = 1764;
+      }
+    ];
     allowedUDPPortRanges = allowedTCPPortRanges;
   };
 
@@ -340,7 +367,10 @@
     ];
   };
 
-  nix.settings.trusted-users = [ "root" "@wheel" ];
+  nix.settings.trusted-users = [
+    "root"
+    "@wheel"
+  ];
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you

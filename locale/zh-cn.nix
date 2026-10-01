@@ -1,4 +1,4 @@
-{pkgs, inputs, ...}: {
+{ pkgs, inputs, ... }: {
   time.timeZone = "Asia/Shanghai";
 
   nixpkgs.overlays = [ inputs.chinese-fonts-overlay.overlays.default ];
@@ -14,8 +14,14 @@
       enable = true;
 
       defaultFonts = {
-        sansSerif = [ "Alibaba Sans" "Alibaba PuHuiTi 3.0" ];
-        serif = [ "Noto Serif" "Source Han Serif SC" ];
+        sansSerif = [
+          "Alibaba Sans"
+          "Alibaba PuHuiTi 3.0"
+        ];
+        serif = [
+          "Noto Serif"
+          "Source Han Serif SC"
+        ];
       };
     };
   };

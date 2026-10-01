@@ -22,33 +22,44 @@
     chinese-fonts-overlay.url = "github:brsvh/chinese-fonts-overlay/main";
   };
 
-  outputs = { self, nixpkgs, home-manager, lanzaboote, sops-nix, nix-flatpak, chinese-fonts-overlay, ...}@inputs: {
-    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt;
-    nixosConfigurations = {
-      qby-laptop = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./hosts/qby-laptop
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      lanzaboote,
+      sops-nix,
+      nix-flatpak,
+      chinese-fonts-overlay,
+      ...
+    }@inputs:
+    {
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt;
+      nixosConfigurations = {
+        qby-laptop = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/qby-laptop
 
-          lanzaboote.nixosModules.lanzaboote
-          nix-flatpak.nixosModules.nix-flatpak
+            lanzaboote.nixosModules.lanzaboote
+            nix-flatpak.nixosModules.nix-flatpak
 
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
 
-            home-manager.extraSpecialArgs = { inherit inputs; };
-            home-manager.users."cubewhy" = {
-              imports = [
-                sops-nix.homeManagerModules.sops
-                ./home/cubewhy.nix
-              ];
-            };
-          }
-        ];
+              home-manager.extraSpecialArgs = { inherit inputs; };
+              home-manager.users."cubewhy" = {
+                imports = [
+                  sops-nix.homeManagerModules.sops
+                  ./home/cubewhy.nix
+                ];
+              };
+            }
+          ];
+        };
       };
     };
-  };
 }

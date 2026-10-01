@@ -49,8 +49,8 @@
 
   dconf.settings = {
     "org/virt-manager/virt-manager/connections" = {
-      autoconnect = ["qemu:///system"];
-      uris = ["qemu:///system"];
+      autoconnect = [ "qemu:///system" ];
+      uris = [ "qemu:///system" ];
     };
   };
 
@@ -108,7 +108,10 @@
     history.size = 10000;
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "zoxide" ];
+      plugins = [
+        "git"
+        "zoxide"
+      ];
       theme = "robbyrussell";
       extraConfig = ''
         ZSH_DISABLE_COMPFIX="true"

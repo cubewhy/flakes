@@ -9,7 +9,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   networking.proxy.default = "http://127.0.0.1:7890";
   networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
@@ -25,7 +26,7 @@
   nixpkgs.overlays = [
     (final: prev: {
       mihomo = prev.mihomo.overrideAttrs (oldAttrs: {
-        patches = (oldAttrs.patches or []) ++ [
+        patches = (oldAttrs.patches or [ ]) ++ [
           ./mihomo-xray-workaround.patch
         ];
       });
@@ -48,12 +49,23 @@
 
   networking.firewall = {
     enable = lib.mkForce false;
-    trustedInterfaces = ["utun" "virbr0" "docker0" "lo"];
+    trustedInterfaces = [
+      "utun"
+      "virbr0"
+      "docker0"
+      "lo"
+    ];
 
     checkReversePath = "loose";
 
-    allowedUDPPorts = [53 1053];
-    allowedTCPPorts = [53 1053];
+    allowedUDPPorts = [
+      53
+      1053
+    ];
+    allowedTCPPorts = [
+      53
+      1053
+    ];
 
     extraCommands = ''
       iptables -A FORWARD -i docker0 -j ACCEPT
@@ -72,7 +84,7 @@
 
   networking.nat = {
     enable = true;
-    internalInterfaces = ["virbr0"];
+    internalInterfaces = [ "virbr0" ];
     externalInterface = "utun";
   };
 

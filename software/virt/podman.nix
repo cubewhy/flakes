@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   virtualisation.containers.enable = true;
   virtualisation = {
     podman = {
@@ -47,11 +47,14 @@
   };
 
   virtualisation.containers.registries.settings = {
-    unqualified-search-registries = [ "docker.io" "quay.io" ];
+    unqualified-search-registries = [
+      "docker.io"
+      "quay.io"
+    ];
   };
 
   networking.firewall = {
-    trustedInterfaces = ["podman0"];
+    trustedInterfaces = [ "podman0" ];
 
     extraCommands = ''
       iptables -A INPUT -i podman+ -p udp --dport 53 -j ACCEPT

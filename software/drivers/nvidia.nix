@@ -1,16 +1,16 @@
-{...}: {
-   hardware.graphics.enable = true;
-   services.xserver.videoDrivers = [ "nvidia" ];
-   hardware.nvidia = {
-     open = true;
-     modesetting.enable = true;
-     powerManagement = {
-       enable = true;
-       kernelSuspendNotifier = true;
-     };
-   };
+{ ... }: {
+  hardware.graphics.enable = true;
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia = {
+    open = true;
+    modesetting.enable = true;
+    powerManagement = {
+      enable = true;
+      kernelSuspendNotifier = true;
+    };
+  };
 
-   hardware.nvidia-container-toolkit.enable = true;
+  hardware.nvidia-container-toolkit.enable = true;
 
   nix.settings = {
     extra-substituters = [

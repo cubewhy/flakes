@@ -1,9 +1,11 @@
-{pkgs, ...}: let
+{ pkgs, ... }:
+let
   deltaThemes = pkgs.fetchurl {
     url = "https://raw.githubusercontent.com/dandavison/delta/5ddd7fa66ee900b6783e80089174d2170e46f06f/themes.gitconfig";
     sha256 = "sha256-kPGzO4bzUXUAeG82UjRk621uL1faNOZfN4wNTc1oeN4=";
   };
-in {
+in
+{
   xdg.configFile."delta/themes.gitconfig".source = deltaThemes;
 
   programs.delta = {
@@ -41,7 +43,7 @@ in {
     enable = true;
 
     includes = [
-      {path = "~/.config/delta/themes.gitconfig";}
+      { path = "~/.config/delta/themes.gitconfig"; }
     ];
   };
 }
