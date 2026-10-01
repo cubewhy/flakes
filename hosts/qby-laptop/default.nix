@@ -176,6 +176,16 @@
     SUBSYSTEM=="usb", ATTR{idVendor}=="256c", ATTR{idProduct}=="200e", MODE="0666"
   '';
 
+  nixpkgs.overlays = [
+    (final: prev: {
+     kdePackages = prev.kdePackages.overrideScope (kdeFinal: kdePrev: {
+        spectacle = kdePrev.spectacle.override {
+          tesseractLanguages = [ "fra" "eng" "deu" "spa" "chi_sim" "chi_tra" "jpn" ];
+        };
+      });
+     })
+  ];
+
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
