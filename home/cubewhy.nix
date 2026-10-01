@@ -88,13 +88,18 @@
         zi "$@" && nvim
       }
 
-      dev-run() {
-        distrobox enter dev -- bash -ic "$*"
-      }
-
       if [[ -z "$DISTROBOX_ENTERED" && ! -f /run/.containerenv ]]; then
+        dev-run() {
+          distrobox enter dev -- bash -ic "$*"
+        }
+
         nvim() {
           distrobox enter dev -- bash -lic 'command nvim "$@"' _ "$@"
+        }
+      else
+        # currently inside a distrobox env
+        dev-run() {
+          "$@"
         }
       fi
     '';
