@@ -199,6 +199,15 @@
     ddcutil
     usbutils
     pciutils
+    fd
+    ripgrep
+    unzip
+    imagemagick
+    sqlite
+    gnumake
+
+    nodejs_24
+    corepack
 
     kdePackages.ksshaskpass
     kdePackages.partitionmanager
@@ -211,6 +220,11 @@
     kdePackages.kdialog
     kdePackages.filelight
   ];
+
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+  };
 
   services.flatpak = {
     enable = true;

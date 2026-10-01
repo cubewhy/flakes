@@ -29,6 +29,7 @@
     wl-clipboard
     vlc
     sccache
+    neovim
 
     nerd-fonts.jetbrains-mono
   ];
@@ -93,9 +94,9 @@
           distrobox enter dev -- bash -ic "$*"
         }
 
-        nvim() {
-          distrobox enter dev -- bash -lic 'command nvim "$@"' _ "$@"
-        }
+        # nvim() {
+        #   distrobox enter dev -- bash -lic 'command nvim "$@"' _ "$@"
+        # }
       else
         # currently inside a distrobox env
         dev-run() {
