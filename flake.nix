@@ -23,6 +23,7 @@
   };
 
   outputs = { self, nixpkgs, home-manager, lanzaboote, sops-nix, nix-flatpak, chinese-fonts-overlay, ...}@inputs: {
+    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
     nixosConfigurations = {
       qby-laptop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
