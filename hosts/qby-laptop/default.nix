@@ -239,6 +239,7 @@
     gnumake
     nixfmt
     nil
+    htop
 
     nodejs_24
     corepack
