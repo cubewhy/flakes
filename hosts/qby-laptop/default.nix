@@ -244,6 +244,7 @@
     nodejs_24
     corepack
     tree-sitter
+    gcc
 
     kdePackages.ksshaskpass
     kdePackages.partitionmanager
