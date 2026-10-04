@@ -10,8 +10,8 @@ index ff6a0a3d..e1a5fe8b 100644
 -		hello.SessionId[1] = 8
 -		hello.SessionId[2] = 2
 +		hello.SessionId[0] = 26
-+		hello.SessionId[1] = 7
-+		hello.SessionId[2] = 11
++		hello.SessionId[1] = 9
++		hello.SessionId[2] = 30
  
  		//log.Debugln("REALITY hello.sessionId[:16]: %v", hello.SessionId[:16])
  
