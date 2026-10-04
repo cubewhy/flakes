@@ -19,7 +19,8 @@
     ../../software/sccache.nix
     ../../software/plymouth.nix
     ../../software/wireshark.nix
-    ../../software/proxy/mihomo
+    # ../../software/proxy/mihomo
+    ../../software/proxy/v2raya.nix
     ../../software/virt/podman.nix
     ../../software/virt/distrobox.nix
     ../../software/drivers/nvidia.nix
