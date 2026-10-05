@@ -30,6 +30,7 @@
     vlc
     sccache
     neovim
+    wineWow64Packages.stable
 
     nerd-fonts.jetbrains-mono
   ];
