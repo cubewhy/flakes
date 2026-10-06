@@ -37,6 +37,7 @@
 
   home.sessionPath = [
     "$HOME/.local/bin"
+    "$HOME/.npm-global/bin"
   ];
 
   home.file.".cargo/config.toml".text = ''
