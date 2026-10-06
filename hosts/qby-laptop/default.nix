@@ -341,8 +341,17 @@
     PINENTRY_KDE_USE_WALLET = "1";
   };
 
-  programs.appimage.enable = true;
-  programs.appimage.binfmt = true;
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+    package = pkgs.appimage-run.override {
+      extraPkgs =
+        pkgs: with pkgs; [
+          webkitgtk_4_1
+          libsoup_3
+        ];
+    };
+  };
 
   programs.nh = {
     enable = true;
