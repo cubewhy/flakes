@@ -152,6 +152,7 @@
       "wheel"
       "i2c"
       "wireshark"
+      "dialout"
     ];
   };
 
@@ -188,6 +189,9 @@
 
     SUBSYSTEM=="usb", ATTR{idVendor}=="3434", ATTR{idProduct}=="d000", MODE="0660", TAG+="uaccess"
     SUBSYSTEM=="hidraw", ATTR{idVendor}=="3434", ATTR{idProduct}=="d000", MODE="0660", TAG+="uaccess"
+
+    # ESP32-s3
+    ATTRS{idVendor}=="303a", ATTRS{idProduct}=="1001", MODE="0666", TAG+="uaccess"
 
     # Gaomon M5 V2 / 256c:200e
     KERNEL=="hidraw*", ATTRS{idVendor}=="256c", ATTRS{idProduct}=="200e", MODE="0666"
