@@ -22,6 +22,7 @@
     # ../../software/proxy/mihomo
     ../../software/proxy/v2raya.nix
     ../../software/virt/podman.nix
+    ../../software/virt/waydroid.nix
     ../../software/virt/distrobox.nix
     ../../software/drivers/nvidia.nix
     ../../software/drivers/bluetooth.nix
