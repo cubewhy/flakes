@@ -250,6 +250,7 @@
     nixfmt
     nil
     htop
+    uv
 
     nodejs_24
     corepack
