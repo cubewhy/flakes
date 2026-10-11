@@ -22,6 +22,7 @@
     ../../software/wireshark.nix
     # ../../software/proxy/mihomo
     ../../software/proxy/v2raya.nix
+    ../../software/virt/kvm.nix
     ../../software/virt/podman.nix
     ../../software/virt/waydroid.nix
     ../../software/virt/distrobox.nix
@@ -155,6 +156,7 @@
       "i2c"
       "wireshark"
       "dialout"
+      "libvirtd"
     ];
   };
 
