@@ -11,6 +11,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ../../locale/fonts.nix
     ../../locale/zh-cn.nix
     ../../software/steam.nix
     ../../software/fcitx5.nix
@@ -298,31 +299,6 @@
 
     nvidiaBusId = "PCI:1:0:0";
     amdgpuBusId = "PCI:7:0:0";
-  };
-
-  fonts = {
-    enableDefaultPackages = true;
-
-    packages = with pkgs; [
-      cantarell-fonts
-      ubuntu-sans
-      inter
-
-      source-han-sans
-      source-han-serif
-
-      noto-fonts
-      noto-fonts-color-emoji
-    ];
-
-    fontconfig = {
-      enable = true;
-
-      defaultFonts = {
-        monospace = [ "JetBrainsMono Nerd Font" ];
-        emoji = [ "Noto Color Emoji" ];
-      };
-    };
   };
 
   # Some programs need SUID wrappers, can be configured further or are

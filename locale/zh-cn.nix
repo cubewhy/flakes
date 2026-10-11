@@ -1,30 +1,5 @@
-{ pkgs, inputs, ... }: {
+{ ... }: {
   time.timeZone = "Asia/Shanghai";
-
-  nixpkgs.overlays = [ inputs.chinese-fonts-overlay.overlays.default ];
-
-  fonts = {
-    packages = with pkgs; [
-      alibaba-fonts
-      source-han-serif
-      noto-fonts
-    ];
-
-    fontconfig = {
-      enable = true;
-
-      defaultFonts = {
-        sansSerif = [
-          "Alibaba Sans"
-          "Alibaba PuHuiTi 3.0"
-        ];
-        serif = [
-          "Noto Serif"
-          "Source Han Serif SC"
-        ];
-      };
-    };
-  };
 
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "zh_CN.UTF-8";
