@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ config, pkgs, ... }: {
   virtualisation.containers.enable = true;
   virtualisation = {
     podman = {
@@ -22,30 +22,7 @@
     containers.base_hosts_file = "/etc/containers/hosts";
   };
 
-  systemd.services.podman-restart = {
-    enable = true;
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      ExecStart = [
-        ""
-        "${pkgs.podman}/bin/podman start --all --filter restart-policy=always --filter restart-policy=unless-stopped"
-      ];
-    };
-  };
-
-  systemd.user.services.podman-restart = {
-    enable = true;
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      Environment = [
-        "PATH=/run/wrappers/bin:/run/current-system/sw/bin:%h/.nix-profile/bin"
-      ];
-      ExecStart = [
-        ""
-        "${pkgs.podman}/bin/podman start --all --filter restart-policy=always --filter restart-policy=unless-stopped"
-      ];
-    };
-  };
+  systemd.services.podman-restart.enable = true;
 
   virtualisation.containers.registries.settings = {
     unqualified-search-registries = [

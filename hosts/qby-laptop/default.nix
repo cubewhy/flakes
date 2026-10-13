@@ -325,6 +325,15 @@
     PINENTRY_KDE_USE_WALLET = "1";
   };
 
+  systemd.user.services.podman-restart = {
+    wantedBy = [ "multi-user.target" ];
+
+    unitConfig = {
+      ConditionUser = "cubewhy";
+      Documentation = "man:podman-start(1)";
+    };
+  };
+
   programs.appimage = {
     enable = true;
     binfmt = true;
