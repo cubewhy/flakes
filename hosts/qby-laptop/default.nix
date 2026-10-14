@@ -326,6 +326,7 @@
   };
 
   systemd.user.services.podman-restart = {
+    enable = true;
     wantedBy = [ "multi-user.target" ];
 
     unitConfig = {
