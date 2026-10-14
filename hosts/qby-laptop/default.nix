@@ -331,7 +331,6 @@
 
     unitConfig = {
       ConditionUser = "cubewhy";
-      Documentation = "man:podman-start(1)";
     };
   };
 
