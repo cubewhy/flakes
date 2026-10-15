@@ -32,6 +32,7 @@
     sccache
     neovim
     wineWow64Packages.stable
+    uv
 
     nerd-fonts.jetbrains-mono
   ];
