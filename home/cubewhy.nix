@@ -115,9 +115,11 @@
       plugins = [
         "git"
         "zoxide"
+        "python"
       ];
       theme = "robbyrussell";
       extraConfig = ''
+        PYTHON_AUTO_VRUN=true
         ZSH_DISABLE_COMPFIX="true"
       '';
     };
