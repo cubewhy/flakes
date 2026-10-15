@@ -48,6 +48,9 @@
   boot.initrd.kernelModules = [
     "tpm_crb"
     "tpm_tis"
+    "vfio_pci"
+    "vfio"
+    "vfio_iommu_type1"
   ];
 
   boot.initrd.luks.devices = {
@@ -176,8 +179,12 @@
   '';
 
   boot.kernelParams = [
+    "amd_iommu=on"
+    "iommu=pt"
     "quiet"
     "gpiolib_acpi.ignore_wake=AMDI0030:00@4"
+
+    # "vfio-pci.ids=10de:2d18,10de:22eb"
   ];
 
   services.udev.extraRules = ''
