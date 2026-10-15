@@ -28,7 +28,7 @@
     krita
     gimp
     wl-clipboard
-    vlc
+    haruna
     sccache
     neovim
     wineWow64Packages.stable
