@@ -131,6 +131,14 @@
     variant = "";
   };
 
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      libva-vdpau-driver
+      libvdpau-va-gl
+    ];
+  };
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
