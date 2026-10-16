@@ -271,6 +271,7 @@
     nil
     htop
     uv
+    gh
 
     nodejs_24
     corepack

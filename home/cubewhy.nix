@@ -33,6 +33,7 @@
     neovim
     wineWow64Packages.stable
     uv
+    gh
 
     nerd-fonts.jetbrains-mono
   ];
