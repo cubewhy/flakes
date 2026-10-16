@@ -195,6 +195,8 @@
     # "vfio-pci.ids=10de:2d18,10de:22eb"
   ];
 
+  boot.kernel.sysctl."kernel.sysrq" = 1;
+
   services.udev.extraRules = ''
     SUBSYSTEM=="hidraw", ATTRS{idVendor}=="342d", ATTRS{idProduct}=="e487", MODE="0666", TAG+="uaccess"
     SUBSYSTEM=="usb", ATTRS{idVendor}=="342d", ATTRS{idProduct}=="e487", MODE="0666", TAG+="uaccess"
