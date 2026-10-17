@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
-VERSION="615.78.08"
+
+echo "Fetching latest NVIDIA driver version from GitHub..." >&2
+VERSION=$(curl -s "https://api.github.com/repos/NVIDIA/open-gpu-kernel-modules/releases/latest" \
+  | grep -Po '"tag_name":\s*"\K[^"]+' || true)
+
+echo "Latest version is $VERSION" >&2
 
 get_hash() {
+  echo "Calculating hash of $1" >&2
   nix-prefetch-url "$1" "${@:2}" --type sha256 2>/dev/null | xargs nix hash convert --to sri --hash-algo sha256
 }
 
