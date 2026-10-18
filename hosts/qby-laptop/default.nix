@@ -268,6 +268,7 @@
     sqlite
     gnumake
     nixfmt
+    libva-utils
     nil
     htop
     uv
