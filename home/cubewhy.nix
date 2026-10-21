@@ -86,6 +86,7 @@
 
     shellAliases = {
       rebuild = "sudo nixos-rebuild switch --flake ~/flakes#qby-laptop";
+      rebuild-boot = "sudo nixos-rebuild boot --flake ~/flakes#qby-laptop";
       upgrade-system = "sudo -v && (while true; do sudo -n -v; sleep 60; kill -0 \"$$\" || exit; done 2>/dev/null &) && nix flake update --flake ~/flakes && sudo nixos-rebuild boot --flake ~/flakes#qby-laptop";
       ollama = "podman exec -it ollama ollama";
     };
