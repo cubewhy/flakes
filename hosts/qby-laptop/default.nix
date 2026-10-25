@@ -44,7 +44,6 @@
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  boot.initrd.systemd.enable = true;
   boot.initrd.kernelModules = [
     "tpm_crb"
     "tpm_tis"
