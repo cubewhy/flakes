@@ -219,32 +219,8 @@
   '';
 
   nixpkgs.overlays = [
-    (final: prev: {
-      kdePackages = prev.kdePackages.overrideScope (
-        kdeFinal: kdePrev: {
-          spectacle = kdePrev.spectacle.override {
-            tesseractLanguages = [
-              "fra"
-              "eng"
-              "deu"
-              "spa"
-              "chi_sim"
-              "chi_tra"
-              "jpn"
-            ];
-          };
-        }
-      );
-      neovim = prev.symlinkJoin {
-        name = "neovim-wrapped";
-        paths = [ prev.neovim ];
-        nativeBuildInputs = [ prev.makeWrapper ];
-        postBuild = ''
-          wrapProgram $out/bin/nvim \
-            --prefix LD_LIBRARY_PATH : "${prev.lib.makeLibraryPath [ prev.sqlite ]}"
-        '';
-      };
-    })
+    (import ./overlays/neovim.nix)
+    (import ./overlays/spectacle.nix)
   ];
 
   # List packages installed in system profile.
