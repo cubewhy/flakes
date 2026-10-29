@@ -245,7 +245,7 @@
     nixfmt
     libva-utils
     nil
-    htop
+    btop
     uv
     gh
 
