@@ -219,8 +219,8 @@
   '';
 
   nixpkgs.overlays = [
-    (import ./overlays/neovim.nix)
-    (import ./overlays/spectacle.nix)
+    (import ../../overlays/neovim.nix)
+    (import ../../overlays/spectacle.nix)
   ];
 
   # List packages installed in system profile.
