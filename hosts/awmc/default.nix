@@ -26,6 +26,8 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  hardware.microsoft-surface.kernelVersion = "stable";
+
   networking.hostName = "qby-nixos-laptop";
 
   # Enable networking
