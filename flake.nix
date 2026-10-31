@@ -19,6 +19,7 @@
     };
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
   };
 
   outputs =
@@ -29,6 +30,7 @@
       lanzaboote,
       sops-nix,
       nix-flatpak,
+      chaotic,
       ...
     }@inputs:
     {
@@ -42,6 +44,7 @@
 
             lanzaboote.nixosModules.lanzaboote
             nix-flatpak.nixosModules.nix-flatpak
+            chaotic.nixosModules.default
 
             home-manager.nixosModules.home-manager
             {
