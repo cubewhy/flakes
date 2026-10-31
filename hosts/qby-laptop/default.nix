@@ -48,9 +48,9 @@
   boot.initrd.kernelModules = [
     "tpm_crb"
     "tpm_tis"
-    "vfio_pci"
-    "vfio"
-    "vfio_iommu_type1"
+    # "vfio_pci"
+    # "vfio"
+    # "vfio_iommu_type1"
   ];
 
   boot.initrd.luks.devices = {
