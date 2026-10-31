@@ -70,6 +70,7 @@
           modules = [
             ./hosts/awmc
             nixos-hardware.nixosModules.microsoft-surface-pro-intel
+            nix-flatpak.nixosModules.nix-flatpak
           ];
         };
       };
