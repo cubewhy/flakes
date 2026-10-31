@@ -75,10 +75,6 @@
     jack.enable = true;
   };
 
-  config.microsoft-surface.ipts.enable = true;
-
-  config.microsoft-surface.surface-control.enable = true;
-
   boot.extraModprobeConfig = ''
     options mwifiex_pcie disable_auto_ds=1
   '';
