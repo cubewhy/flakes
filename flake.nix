@@ -19,7 +19,6 @@
     };
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
-    # chinese-fonts-overlay.url = "github:brsvh/chinese-fonts-overlay/main";
   };
 
   outputs =
@@ -30,7 +29,6 @@
       lanzaboote,
       sops-nix,
       nix-flatpak,
-      # chinese-fonts-overlay,
       ...
     }@inputs:
     {
