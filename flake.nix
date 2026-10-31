@@ -20,6 +20,7 @@
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
   outputs =
@@ -31,6 +32,7 @@
       sops-nix,
       nix-flatpak,
       chaotic,
+      nixos-hardware,
       ...
     }@inputs:
     {
@@ -59,6 +61,15 @@
                 ];
               };
             }
+          ];
+        };
+
+        awmc = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/awmc
+            nixos-hardware.nixosModules.microsoft-surface-pro-intel
           ];
         };
       };
