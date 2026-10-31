@@ -33,7 +33,6 @@
     neovim
     wineWow64Packages.stable
     uv
-    gh
 
     nerd-fonts.jetbrains-mono
   ];
@@ -126,6 +125,11 @@
         ZSH_DISABLE_COMPFIX="true"
       '';
     };
+  };
+
+  programs.gh = {
+    enable = true;
+    gitCredentialHelper.enable = true;
   };
 
   programs.git = {
