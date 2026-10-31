@@ -26,8 +26,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.supportedFilesystems = [ "ntfs3" ];
-
   networking.hostName = "qby-nixos-laptop";
 
   # Enable networking

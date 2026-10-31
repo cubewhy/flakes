@@ -103,8 +103,6 @@
     "d /mnt/data 1777 root root -"
   ];
 
-  boot.supportedFilesystems = [ "ntfs3" ];
-
   networking.hostName = "qby-nixos-laptop";
 
   # Enable networking
