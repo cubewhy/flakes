@@ -27,6 +27,15 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   hardware.microsoft-surface.kernelVersion = "stable";
+  boot.kernelPatches = [
+    {
+      name = "disable-rust";
+      patch = null;
+      structuredExtraConfig = with lib.kernel; {
+        RUST = lib.mkForce no;
+      };
+    }
+  ];
 
   networking.hostName = "qby-nixos-laptop";
 
