@@ -7,7 +7,6 @@
 {
   imports = [
     ./hardware-configuration.nix
-    <nixos-hardware/microsoft/surface/surface-pro-intel>
     ../../locale/fonts.nix
     ../../locale/zh-cn.nix
     ../../software/fcitx5.nix
