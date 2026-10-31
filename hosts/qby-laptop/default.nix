@@ -315,8 +315,6 @@
     PINENTRY_KDE_USE_WALLET = "1";
     SSH_ASKPASS = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
     SSH_ASKPASS_REQUIRE = "prefer";
-    # FIXME: remove this variable after plasma 6.8.2 is released
-    KWIN_ALLOW_VULKAN_MGPU_COPIES = "1";
   };
 
   systemd.user.services.gpg-agent.environment = {
