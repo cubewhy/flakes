@@ -36,7 +36,7 @@
     }
   ];
 
-  networking.hostName = "qby-nixos-laptop";
+  networking.hostName = "awmc";
 
   # Enable networking
   networking.networkmanager.enable = true;
