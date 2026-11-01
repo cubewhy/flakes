@@ -265,8 +265,8 @@
     kdePackages.kate
     kdePackages.kdialog
     kdePackages.filelight
-    kdePackages.qtstyleplugin-kvantum
-    klassy
+    # kdePackages.qtstyleplugin-kvantum
+    # klassy
   ];
 
   programs.neovim = {
