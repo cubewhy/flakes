@@ -46,6 +46,7 @@
       # Required
       glib
       gtk2
+      wayland
 
       # Inspired by steam
       # https://github.com/NixOS/nixpkgs/blob/master/pkgs/by-name/st/steam/package.nix#L36-L85
