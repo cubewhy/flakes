@@ -103,7 +103,7 @@
     "d /mnt/data 1777 root root -"
   ];
 
-  networking.hostName = "qby-nixos-laptop";
+  networking.hostName = "qby-laptop";
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -345,8 +345,11 @@
 
   programs.nh = {
     enable = true;
-    clean.enable = true;
-    clean.extraArgs = "--keep-since 4d --keep 3";
+    flake = "/home/cubewhy/flakes";
+    clean = {
+      enable = true;
+      extraArgs = "--keep-since 4d --keep 3";
+    };
   };
 
   # Enable the OpenSSH daemon.
