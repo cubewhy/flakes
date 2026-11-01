@@ -15,7 +15,6 @@
     ../../software/sccache.nix
     ../../software/plymouth.nix
     # ../../software/proxy/mihomo
-    ../../software/proxy/v2raya.nix
     ../../software/virt/podman.nix
     ../../software/virt/distrobox.nix
     ../../software/drivers/bluetooth.nix
@@ -55,6 +54,17 @@
   programs.kdeconnect.enable = true;
   hardware.i2c.enable = true;
 
+  services.iptsd = {
+    enable = true;
+    config = {
+      Contacts = {
+        SizeMin = 0.12;
+        ActivationThreshold = 16;
+        DeactivationThreshold = 12;
+      };
+    };
+  };
+
   services.xserver = {
     excludePackages = [ pkgs.xterm ];
   };
@@ -89,6 +99,12 @@
   '';
 
   hardware.sensor.iio.enable = true;
+
+  services.scx = {
+    enable = true;
+    scheduler = "scx_lavd";
+    extraArgs = [ "--autopilot" ];
+  };
 
   boot.kernel.sysctl."kernel.sysrq" = 1;
 
@@ -159,6 +175,8 @@
     enable = true;
     enableSSHSupport = true;
   };
+
+  services.openssh.enable = true;
 
   programs.gnupg.agent = {
     pinentryPackage = pkgs.pinentry-qt;
