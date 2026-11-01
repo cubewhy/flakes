@@ -249,6 +249,7 @@
     btop
     uv
     gh
+    file
 
     nodejs_24
     corepack
