@@ -247,6 +247,7 @@
     libva-utils
     nil
     btop
+    tree
     uv
     gh
     file
