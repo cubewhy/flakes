@@ -35,6 +35,18 @@
     uv
 
     nerd-fonts.jetbrains-mono
+
+    mutt-wizard
+    neomutt
+    isync
+    msmtp
+    pass
+    gnupg
+    curl
+    abook
+    notmuch
+    lynx
+    libnotify
   ];
 
   home.sessionPath = [
