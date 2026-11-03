@@ -45,7 +45,6 @@
 
       # Required
       glib
-      gtk2
       wayland
 
       # Inspired by steam
