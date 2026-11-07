@@ -232,7 +232,7 @@
     librewolf
     sbctl
     p7zip
-    rar
+    unrar
     bind
     ddcutil
     usbutils
