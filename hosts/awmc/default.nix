@@ -100,10 +100,11 @@
 
   hardware.sensor.iio.enable = true;
 
-  services.scx = {
+  services.scx-loader = {
     enable = true;
-    scheduler = "scx_lavd";
-    extraArgs = [ "--autopilot" ];
+    config = {
+      default_sched = "scx_lavd";
+    };
   };
 
   boot.kernel.sysctl."kernel.sysrq" = 1;
