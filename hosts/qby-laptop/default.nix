@@ -238,6 +238,7 @@
     uv
     gh
     file
+    rayburst
 
     nodejs_24
     corepack
