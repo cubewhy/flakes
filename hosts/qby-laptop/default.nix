@@ -18,6 +18,7 @@
     ../../software/direnv.nix
     ../../software/nix-ld.nix
     ../../software/sccache.nix
+    ../../software/desktop/plasma.nix
     ../../software/plymouth.nix
     ../../software/wireshark.nix
     ../../software/cachyos.nix
@@ -110,20 +111,6 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
-
-  # Enable the X11 windowing system.
-  # You can disable this if you're only using the Wayland session.
-  services.xserver.enable = true;
-
-  # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.plasma-login-manager.enable = true;
-  services.desktopManager.plasma6.enable = true;
-  programs.kdeconnect.enable = true;
-  hardware.i2c.enable = true;
-
-  services.xserver = {
-    excludePackages = [ pkgs.xterm ];
-  };
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -256,19 +243,6 @@
     corepack
     tree-sitter
     gcc
-
-    kdePackages.ksshaskpass
-    kdePackages.partitionmanager
-    kdePackages.kcolorchooser
-    kdePackages.kclock
-    kdePackages.kfind
-    kdePackages.kcharselect
-    kdePackages.kcalc
-    kdePackages.kate
-    kdePackages.kdialog
-    kdePackages.filelight
-    # kdePackages.qtstyleplugin-kvantum
-    # klassy
   ];
 
   programs.neovim = {
@@ -280,10 +254,6 @@
     enable = true;
     packages = [ ];
   };
-
-  environment.plasma6.excludePackages = with pkgs; [
-    kdePackages.discover
-  ];
 
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
@@ -312,16 +282,6 @@
 
   programs.gnupg.agent = {
     pinentryPackage = pkgs.pinentry-qt;
-  };
-
-  environment.sessionVariables = {
-    PINENTRY_KDE_USE_WALLET = "1";
-    SSH_ASKPASS = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
-    SSH_ASKPASS_REQUIRE = "prefer";
-  };
-
-  systemd.user.services.gpg-agent.environment = {
-    PINENTRY_KDE_USE_WALLET = "1";
   };
 
   systemd.user.services.podman-restart = {
