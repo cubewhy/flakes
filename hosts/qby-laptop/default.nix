@@ -238,6 +238,7 @@
     uv
     gh
     file
+    psmisc
 
     nodejs_24
     corepack
