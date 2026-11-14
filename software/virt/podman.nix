@@ -13,10 +13,6 @@
   };
   virtualisation.oci-containers.backend = "podman";
 
-  environment.etc."containers/hosts".text = ''
-    10.88.0.1 host.docker.internal
-  '';
-
   virtualisation.containers.containersConf.settings = {
     containers.log_driver = "k8s-file";
     containers.base_hosts_file = "/etc/containers/hosts";
