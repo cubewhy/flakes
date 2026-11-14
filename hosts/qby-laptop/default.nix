@@ -22,6 +22,7 @@
     ../../software/plymouth.nix
     ../../software/wireshark.nix
     ../../software/cachyos.nix
+    ../../software/tailscale.nix
     # ../../software/proxy/mihomo
     ../../software/proxy/v2raya.nix
     ../../software/virt/kvm.nix
@@ -166,8 +167,12 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  networking.networkmanager.wifi.powersave = false;
+
   boot.extraModprobeConfig = ''
     options snd_hda_intel power_save=0
+    options iwlwifi power_save=0
+    options iwlmvm power_scheme=1
     blacklist redmi_wmi
     blacklist wacom
     blacklist hid_uclogic
@@ -239,6 +244,7 @@
     gh
     file
     psmisc
+    iw
 
     nodejs_24
     corepack
@@ -286,11 +292,25 @@
   };
 
   systemd.user.services.podman-restart = {
-    enable = true;
-    wantedBy = [ "multi-user.target" ];
+    description = "Podman Start All Containers With Restart Policy Set To Always Or Unless-Stopped";
+    documentation = [ "man:podman-start(1)" ];
+    wantedBy = [ "default.target" ];
+    wants = [ "network-online.target" ];
+    after = [ "network-online.target" ];
 
     unitConfig = {
-      ConditionUser = "cubewhy";
+      StartLimitIntervalSec = 0;
+    };
+
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+      Environment = [
+        ''LOGGING="--log-level=info"''
+        "PATH=/run/current-system/sw/bin"
+      ];
+      ExecStart = "${pkgs.podman}/bin/podman $LOGGING start --all --filter should-start-on-boot=true";
+      ExecStop = "${pkgs.podman}/bin/podman $LOGGING stop --service --all";
     };
   };
 
