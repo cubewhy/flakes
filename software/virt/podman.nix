@@ -31,14 +31,9 @@
     ];
   };
 
-  networking.firewall = {
-    trustedInterfaces = [ "podman0" ];
-
-    extraCommands = ''
-      iptables -A INPUT -i podman+ -p udp --dport 53 -j ACCEPT
-      iptables -A INPUT -i podman+ -p tcp --dport 53 -j ACCEPT
-    '';
-  };
+  networking.firewall.extraInputRules = ''
+    iifname "podman*" meta l4proto { tcp, udp } th dport 53 accept
+  '';
 
   # Useful other development tools
   environment.systemPackages = with pkgs; [
