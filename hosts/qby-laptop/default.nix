@@ -277,6 +277,12 @@
     amdgpuBusId = "PCI:7:0:0";
   };
 
+  environment.sessionVariables = {
+    # KWIN_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card2";
+    # KWIN_DISABLE_VULKAN = "1";
+    KWIN_ALLOW_VULKAN_MGPU_COPIES = "1";
+  };
+
   services.scx-loader = {
     enable = true;
     config = {
