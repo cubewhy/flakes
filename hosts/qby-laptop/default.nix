@@ -21,7 +21,7 @@
     ../../software/desktop/plasma.nix
     ../../software/plymouth.nix
     ../../software/wireshark.nix
-    ../../software/cachyos.nix
+    # ../../software/cachyos.nix
     ../../software/tailscale.nix
     # ../../software/proxy/mihomo
     ../../software/proxy/v2raya.nix
@@ -277,6 +277,13 @@
 
     nvidiaBusId = "PCI:1:0:0";
     amdgpuBusId = "PCI:7:0:0";
+  };
+
+  services.scx-loader = {
+    enable = true;
+    config = {
+      default_sched = "scx_rusty";
+    };
   };
 
   # Some programs need SUID wrappers, can be configured further or are
