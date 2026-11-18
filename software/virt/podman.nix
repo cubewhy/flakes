@@ -18,7 +18,15 @@
     # containers.base_hosts_file = "/etc/containers/hosts";
   };
 
-  systemd.services.podman-restart.enable = true;
+  systemd.services.podman-restart = {
+    overrideStrategy = "asDropin";
+    wantedBy = [ "multi-user.target" ];
+  };
+
+  systemd.user.services.podman-restart = {
+    overrideStrategy = "asDropin";
+    wantedBy = [ "default.target" ];
+  };
 
   virtualisation.containers.registries.settings = {
     unqualified-search-registries = [
