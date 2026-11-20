@@ -25,4 +25,17 @@
     default = "http://127.0.0.1:20172";
     noProxy = "127.0.0.1,localhost,internal.domain";
   };
+
+  services.resolved = {
+    enable = true;
+    domains = [ "~." ];
+    fallbackDns = [
+      "223.5.5.5"
+      "1.1.1.1"
+    ];
+    settings.Resolve = {
+      DNS = "127.0.0.1:52353";
+      DNSSEC = false;
+    };
+  };
 }
