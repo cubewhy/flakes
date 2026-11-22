@@ -161,7 +161,7 @@
       theme = "robbyrussell";
       extraConfig = ''
         PYTHON_AUTO_VRUN=true
-        ZSH_DISABLE_COMPFIX="true"
+        ZSH_DISABLE_COMPFIX=true
       '';
     };
   };
