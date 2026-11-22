@@ -27,7 +27,6 @@
 
     osu-lazer-bin
     obs-studio
-    thunderbird
     ayugram-desktop
     cotp
     krita
