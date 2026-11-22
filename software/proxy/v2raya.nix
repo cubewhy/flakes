@@ -28,14 +28,14 @@
 
   services.resolved = {
     enable = true;
-    domains = [ "~." ];
-    fallbackDns = [
-      "223.5.5.5"
-      "1.1.1.1"
-    ];
     settings.Resolve = {
       DNS = "127.0.0.1:52353";
       DNSSEC = false;
+      Domains = [ "~." ];
+      FallbackDns = [
+        "223.5.5.5"
+        "1.1.1.1"
+      ];
     };
   };
 }
