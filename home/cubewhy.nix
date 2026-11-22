@@ -156,6 +156,7 @@
         "git"
         "zoxide"
         "python"
+        "tmux"
       ];
       theme = "robbyrussell";
       extraConfig = ''
