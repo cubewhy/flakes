@@ -1,4 +1,9 @@
-{ pkgs, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 
 {
   imports = [
@@ -48,6 +53,20 @@
     lynx
     libnotify
   ];
+
+  xdg.configFile."mutt/wizard".source = "${pkgs.mutt-wizard}/share/mutt-wizard";
+
+  home.activation.fixMuttWizardPaths = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
+    dir="${config.xdg.configHome}/mutt"
+    pattern='/nix/store/[a-z0-9]{32}-mutt-wizard-[^/[:space:]]+/share/mutt-wizard/'
+
+    for rc in "$dir/muttrc" "$dir"/accounts/*.muttrc; do
+      [[ -f "$rc" && ! -L "$rc" ]] || continue
+      if ${pkgs.gnugrep}/bin/grep -Eq "$pattern" "$rc"; then
+        run ${pkgs.gnused}/bin/sed -Ei "s|$pattern|$dir/wizard/|g" "$rc"
+      fi
+    done
+  '';
 
   home.sessionPath = [
     "$HOME/.local/bin"
