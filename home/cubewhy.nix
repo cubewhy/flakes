@@ -37,6 +37,7 @@
     neovim
     wineWow64Packages.stable
     uv
+    tmux
 
     nerd-fonts.jetbrains-mono
 
