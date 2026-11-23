@@ -12,6 +12,15 @@
     allowedUDPPorts = [ config.services.tailscale.port ];
   };
 
+  services.resolved = {
+    enable = true;
+    settings.Resolve = {
+      FallbackDns = [
+        "100.100.100.100"
+      ];
+    };
+  };
+
   # 2. Force tailscaled to use nftables (Critical for clean nftables-only systems)
   # This avoids the "iptables-compat" translation layer issues.
   systemd.services.tailscaled.serviceConfig.Environment = [
