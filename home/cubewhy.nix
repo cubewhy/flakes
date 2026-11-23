@@ -42,6 +42,7 @@
     nerd-fonts.jetbrains-mono
 
     mutt-wizard
+    urlscan
     neomutt
     isync
     msmtp
